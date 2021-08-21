@@ -82,7 +82,7 @@ function Comp(props) {
         render: {
           fillStyle: "#0000ff",
         },
-        frictionAir: 0.1,
+        frictionAir: 0.5,
       }),
     ]);
     Engine.run(engine.current);
