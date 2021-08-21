@@ -1,11 +1,38 @@
-import { useEffect, useRef } from "react";
-import { Engine, Render, Bodies, World } from "matter-js";
+import { useEffect, useRef, useState } from "react";
+import { Engine, Render, Bodies, World, Composites, Common } from "matter-js";
 
 function Comp(props) {
   const scene = useRef();
   const isPressed = useRef(false);
-  const engine = useRef(Engine.create());
 
+  const engine = useRef(Engine.create());
+  const [accelerationX, setAccelerationX] = useState(0);
+  const [accelerationY, setAccelerationY] = useState(0);
+  const [accelerationZ, setAccelerationZ] = useState(0);
+
+  const deviceMotionRequest = () => {
+    if (DeviceMotionEvent.requestPermission) {
+      DeviceMotionEvent.requestPermission()
+        .then((permissionState) => {
+          if (permissionState === "granted") {
+            window.addEventListener("devicemotion", (event) => {
+              if (!event.accelerationIncludingGravity) {
+                alert("event.accelerationIncludingGravity is null");
+                return;
+              }
+              setAccelerationX(event.accelerationIncludingGravity.x);
+              setAccelerationY(event.accelerationIncludingGravity.y);
+              setAccelerationZ(event.accelerationIncludingGravity.z);
+            });
+          }
+        })
+        .catch((e) => {
+          alert(e);
+        });
+    } else {
+      alert("DeviceMotionEvent.requestPermission is not found");
+    }
+  };
   useEffect(() => {
     const cw = document.body.clientWidth;
     const ch = document.body.clientHeight;
@@ -21,42 +48,46 @@ function Comp(props) {
       },
     });
 
+    const stack = Composites.stack(100, 0, 10, 8, 10, 10, (x, y) => {
+      return Bodies.circle(x, y, Common.random(15, 60), {
+        mass: Common.random(50, 100),
+        restitution: 0.01,
+        friction: 0.01,
+        frictionAir: 0.1,
+      });
+    });
+
     World.add(engine.current.world, [
-      Bodies.rectangle(cw / 2, -10, cw, 20, {
+      stack,
+      Bodies.rectangle(cw / 2, 0, cw, 20, {
         isStatic: true,
         render: { fillStyle: "#ff0000" },
       }),
-      Bodies.rectangle(-10, ch / 2, 20, ch, {
+      Bodies.rectangle(0, ch / 2, 20, ch, {
         isStatic: true,
         render: { fillStyle: "#ff0000" },
       }),
-      Bodies.rectangle(cw / 2, ch + 10, cw, 20, {
+      Bodies.rectangle(cw / 2, ch, cw, 20, {
         isStatic: true,
         render: { fillStyle: "#ff0000" },
       }),
-      Bodies.rectangle(cw + 10, ch / 2, 20, ch, {
+      Bodies.rectangle(cw, ch / 2, 20, ch, {
         isStatic: true,
         render: { fillStyle: "#ff0000" },
       }),
-      Bodies.circle(100, 100, 30, {
-        isStatic: true,
-        render: { fillStyle: "#ff0000" },
+      Bodies.circle(cw / 2, 0, 50, {
+        mass: 100,
+        restitution: 0.01,
+        friction: 0.01,
+        render: {
+          fillStyle: "#0000ff",
+        },
+        frictionAir: 0.1,
       }),
     ]);
-
     Engine.run(engine.current);
+
     Render.run(render);
-
-    // const ball = Bodies.circle(cw / 2, ch / 2, 30, {
-    //   mass: 10,
-    //   restitution: 1.5,
-    //   friction: 0.005,
-    //   render: {
-    //     fillStyle: "#0000ff",
-    //   },
-    // });
-    // World.add(engine.current.world, [ball]);
-
     return () => {
       Render.stop(render);
       World.clear(engine.current.world);
@@ -96,13 +127,35 @@ function Comp(props) {
     }
   };
 
+  engine.current.gravity.x = accelerationX;
+  engine.current.gravity.y = -accelerationY;
+
   return (
-    <div
-      onMouseDown={handleDown}
-      onMouseUp={handleUp}
-      onMouseMove={handleAddCircle}
-    >
-      <div ref={scene} style={{ width: "100%", height: "100%" }} />
+    <div>
+      {/* <div>
+        <span>x:{accelerationX},</span>
+        <span>y:{accelerationY},</span>
+        <span>z:{accelerationZ}</span>
+      </div> */}
+      <div
+        onMouseDown={handleDown}
+        onMouseUp={handleUp}
+        onMouseMove={handleAddCircle}
+      >
+        <div ref={scene} style={{ width: "100%", height: "100%" }} />
+      </div>
+      <button
+        style={{
+          width: "500px",
+          height: "100px",
+          position: "fixed",
+          top: "0px",
+          left: "0px",
+        }}
+        onClick={() => deviceMotionRequest()}
+      >
+        センサー開始
+      </button>
     </div>
   );
 }
