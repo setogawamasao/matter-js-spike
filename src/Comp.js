@@ -8,7 +8,6 @@ function Comp(props) {
   const engine = useRef(Engine.create());
   const [accelerationX, setAccelerationX] = useState(0);
   const [accelerationY, setAccelerationY] = useState(0);
-  const [accelerationZ, setAccelerationZ] = useState(0);
 
   const deviceMotionRequest = () => {
     if (DeviceMotionEvent.requestPermission) {
@@ -22,7 +21,6 @@ function Comp(props) {
               }
               setAccelerationX(event.accelerationIncludingGravity.x);
               setAccelerationY(event.accelerationIncludingGravity.y);
-              setAccelerationZ(event.accelerationIncludingGravity.z);
             });
           }
         })
@@ -31,6 +29,8 @@ function Comp(props) {
         });
     } else {
       alert("DeviceMotionEvent.requestPermission is not found");
+      setAccelerationX(0);
+      setAccelerationY(-3);
     }
   };
   useEffect(() => {
@@ -44,46 +44,51 @@ function Comp(props) {
         width: cw,
         height: ch,
         wireframes: false,
-        background: "transparent",
+        background: "#dcac65",
       },
     });
 
-    const stack = Composites.stack(100, 0, 10, 8, 10, 10, (x, y) => {
-      return Bodies.circle(x, y, Common.random(15, 60), {
-        mass: Common.random(50, 100),
+    const stack = Composites.stack(0, 0, 10, 4, 0, 0, (x, y) => {
+      return Bodies.circle(x, y, Common.random(40, 50), {
+        mass: 10,
         restitution: 0.01,
         friction: 0.01,
-        frictionAir: 0.1,
+        frictionAir: Common.random(0.3, 0.5),
+        render: {
+          sprite: {
+            texture: "./tapioka_01.png",
+          },
+        },
       });
     });
 
     World.add(engine.current.world, [
       stack,
-      Bodies.rectangle(cw / 2, 0, cw, 20, {
+      Bodies.rectangle(cw / 2, -10, cw, 20, {
         isStatic: true,
-        render: { fillStyle: "#ff0000" },
+        render: { fillStyle: "#000000" },
       }),
-      Bodies.rectangle(0, ch / 2, 20, ch, {
+      Bodies.rectangle(-10, ch / 2, 20, ch, {
         isStatic: true,
-        render: { fillStyle: "#ff0000" },
+        render: { fillStyle: "#000000" },
       }),
-      Bodies.rectangle(cw / 2, ch, cw, 20, {
+      Bodies.rectangle(cw / 2, ch + 10, cw, 20, {
         isStatic: true,
-        render: { fillStyle: "#ff0000" },
+        render: { fillStyle: "#000000" },
       }),
-      Bodies.rectangle(cw, ch / 2, 20, ch, {
+      Bodies.rectangle(cw + 10, ch / 2, 20, ch, {
         isStatic: true,
-        render: { fillStyle: "#ff0000" },
+        render: { fillStyle: "#000000" },
       }),
-      Bodies.circle(cw / 2, 0, 50, {
-        mass: 100,
-        restitution: 0.01,
-        friction: 0.01,
-        render: {
-          fillStyle: "#0000ff",
-        },
-        frictionAir: 0.5,
-      }),
+      // Bodies.circle(cw / 2, 0, 50, {
+      //   mass: 100,
+      //   restitution: 0.01,
+      //   friction: 0.01,
+      //   render: {
+      //     fillStyle: "#0000ff",
+      //   },
+      //   frictionAir: 0.5,
+      // }),
     ]);
     Engine.run(engine.current);
 
