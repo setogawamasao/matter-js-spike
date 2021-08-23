@@ -1,39 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Engine, Render, Bodies, World, Composites, Common } from "matter-js";
 
 const Tapioca = (props) => {
   const scene = useRef();
   const engine = useRef(Engine.create());
 
-  const [accelerationX, setAccelerationX] = useState(0);
-  const [accelerationY, setAccelerationY] = useState(0);
   const isPressed = useRef(false);
-
-  const deviceMotionRequest = () => {
-    if (DeviceMotionEvent.requestPermission) {
-      DeviceMotionEvent.requestPermission()
-        .then((permissionState) => {
-          if (permissionState === "granted") {
-            window.addEventListener("devicemotion", (event) => {
-              if (!event.accelerationIncludingGravity) {
-                alert("event.accelerationIncludingGravity is null");
-                return;
-              }
-              setAccelerationX(event.accelerationIncludingGravity.x);
-              setAccelerationY(event.accelerationIncludingGravity.y);
-            });
-          }
-        })
-        .catch((e) => {
-          alert(e);
-        });
-    } else {
-      // 加速度センサーがない場合は自然落下
-      alert("このデバイスには加速度センサーが搭載されておりません");
-      setAccelerationX(0);
-      setAccelerationY(-3);
-    }
-  };
 
   useEffect(() => {
     const cw = document.body.clientWidth;
@@ -138,8 +110,8 @@ const Tapioca = (props) => {
     }
   };
 
-  engine.current.gravity.x = accelerationX;
-  engine.current.gravity.y = -accelerationY;
+  engine.current.gravity.x = props.accelerationX;
+  engine.current.gravity.y = -props.accelerationY;
 
   return (
     <div>
@@ -151,18 +123,6 @@ const Tapioca = (props) => {
       >
         <div ref={scene} style={{ width: "100%", height: "100%" }} />
       </div>
-      <button
-        style={{
-          width: "500px",
-          height: "100px",
-          position: "fixed",
-          top: "0px",
-          left: "0px",
-        }}
-        onClick={() => deviceMotionRequest()}
-      >
-        センサー開始
-      </button>
     </div>
   );
 };
