@@ -1,10 +1,10 @@
 import React from "react";
-import Comp from "./Comp.js";
+import Tapioca from "./Tapioca.js";
 
 const App = () => {
   return (
     <>
-      <Comp />
+      <Tapioca />
     </>
   );
 };

@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Engine, Render, Bodies, World, Composites, Common } from "matter-js";
 
-function Comp(props) {
+const Tapioca = (props) => {
   const scene = useRef();
-  const isPressed = useRef(false);
-
   const engine = useRef(Engine.create());
+
   const [accelerationX, setAccelerationX] = useState(0);
   const [accelerationY, setAccelerationY] = useState(0);
+  const isPressed = useRef(false);
 
   const deviceMotionRequest = () => {
     if (DeviceMotionEvent.requestPermission) {
@@ -28,11 +28,13 @@ function Comp(props) {
           alert(e);
         });
     } else {
+      // 加速度センサーがない場合は自然落下
       alert("DeviceMotionEvent.requestPermission is not found");
       setAccelerationX(0);
       setAccelerationY(-3);
     }
   };
+
   useEffect(() => {
     const cw = document.body.clientWidth;
     const ch = document.body.clientHeight;
@@ -49,14 +51,17 @@ function Comp(props) {
     });
 
     const stack = Composites.stack(0, 0, 10, 4, 0, 0, (x, y) => {
-      return Bodies.circle(x, y, Common.random(40, 50), {
+      return Bodies.circle(x, y, Common.random(70, 80), {
         mass: 10,
         restitution: 0.01,
         friction: 0.01,
         frictionAir: Common.random(0.3, 0.5),
         render: {
           sprite: {
-            texture: "./tapioka_01.png",
+            texture: `./tapioca_${
+              Math.floor(Math.random() * (2 - 1 + 1)) + 1
+            }.png`,
+            //texture: `./tapioca_${11}.png`,
           },
         },
       });
@@ -93,6 +98,7 @@ function Comp(props) {
     Engine.run(engine.current);
 
     Render.run(render);
+
     return () => {
       Render.stop(render);
       World.clear(engine.current.world);
@@ -137,11 +143,7 @@ function Comp(props) {
 
   return (
     <div>
-      {/* <div>
-        <span>x:{accelerationX},</span>
-        <span>y:{accelerationY},</span>
-        <span>z:{accelerationZ}</span>
-      </div> */}
+      {/* <div>x:{accelerationX},y:{accelerationY},z:{accelerationZ}</div> */}
       <div
         onMouseDown={handleDown}
         onMouseUp={handleUp}
@@ -163,6 +165,6 @@ function Comp(props) {
       </button>
     </div>
   );
-}
+};
 
-export default Comp;
+export default Tapioca;
