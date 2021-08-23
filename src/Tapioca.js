@@ -1,5 +1,17 @@
 import { useEffect, useRef } from "react";
-import { Engine, Render, Bodies, World, Composites, Common } from "matter-js";
+import {
+  Common,
+  Engine,
+  Render,
+  Bodies,
+  World,
+  Composites,
+  Constraint,
+  MouseConstraint,
+  Mouse,
+  Composite,
+  Vector,
+} from "matter-js";
 
 const Tapioca = (props) => {
   const scene = useRef();
@@ -10,6 +22,7 @@ const Tapioca = (props) => {
   useEffect(() => {
     const cw = document.body.clientWidth;
     const ch = document.body.clientHeight;
+    const world = engine.current.world;
 
     const render = Render.create({
       element: scene.current,
@@ -22,7 +35,20 @@ const Tapioca = (props) => {
       },
     });
 
-    const stack = Composites.stack(0, 0, 10, 4, 0, 0, (x, y) => {
+    const mouse = Mouse.create(render.canvas);
+    const mouseConstraint = MouseConstraint.create(engine.current, {
+      mouse: mouse,
+      constraint: {
+        angularStiffness: 0,
+        render: {
+          visible: false,
+        },
+      },
+    });
+
+    Composite.add(world, mouseConstraint);
+
+    const stack = Composites.stack(0, 0, 10, 4, 1, 1, (x, y) => {
       return Bodies.circle(x, y, Common.random(70, 80), {
         mass: 10,
         restitution: 0.01,
@@ -38,6 +64,17 @@ const Tapioca = (props) => {
         },
       });
     });
+
+    const straw = Bodies.rectangle(cw / 2, ch / 2, 50, ch * 0.8, {
+      render: { fillStyle: "#FF0000" },
+    });
+    const strawConstraint = Constraint.create({
+      pointA: Vector.clone({ x: straw.position.x, y: straw.position.y }),
+      bodyB: straw,
+      length: 0,
+    });
+
+    Composite.add(world, [straw, strawConstraint]);
 
     World.add(engine.current.world, [
       stack,
@@ -117,9 +154,9 @@ const Tapioca = (props) => {
     <div>
       {/* <div>x:{accelerationX},y:{accelerationY},z:{accelerationZ}</div> */}
       <div
-        onMouseDown={handleDown}
-        onMouseUp={handleUp}
-        onMouseMove={handleAddCircle}
+      // onMouseDown={handleDown}
+      // onMouseUp={handleUp}
+      // onMouseMove={handleAddCircle}
       >
         <div ref={scene} style={{ width: "100%", height: "100%" }} />
       </div>
