@@ -65,12 +65,16 @@ const Tapioca = (props) => {
       });
     });
 
-    const straw = Bodies.rectangle(cw / 2, ch / 2, 50, ch * 0.8, {
+    const straw = Bodies.rectangle(cw / 2, ch / 2, 50, ch, {
       render: { fillStyle: "#FF0000" },
     });
     const strawConstraint = Constraint.create({
-      pointA: Vector.clone({ x: straw.position.x, y: straw.position.y }),
+      pointA: Vector.clone({
+        x: straw.position.x,
+        y: straw.position.y - (ch / 2) * 0.8,
+      }),
       bodyB: straw,
+      pointB: { x: 0, y: (-ch / 2) * 0.8 },
       length: 0,
     });
 
