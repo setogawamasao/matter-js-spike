@@ -29,7 +29,7 @@ const Tapioca = (props) => {
         });
     } else {
       // 加速度センサーがない場合は自然落下
-      alert("DeviceMotionEvent.requestPermission is not found");
+      alert("このデバイスには加速度センサーが搭載されておりません");
       setAccelerationX(0);
       setAccelerationY(-3);
     }
