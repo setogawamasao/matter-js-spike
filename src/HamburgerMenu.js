@@ -35,7 +35,7 @@ const HamburgerMenu = (props) => {
         </div>
         <div
           className="menu-item"
-          onClick={() => props.setCupImage("logo.png")}
+          onClick={() => props.setCupImage("logo.PNG")}
         >
           サスタピ
         </div>
