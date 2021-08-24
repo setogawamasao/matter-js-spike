@@ -20,7 +20,7 @@ const Tapioca = (props) => {
 
   const isPressed = useRef(false);
   const [backgroundColor, setBackgroundColor] = useState("#dcac65");
-  const [cupImage, setCupImage] = useState("logo.png");
+  const [cupImage, setCupImage] = useState("logo.PNG");
 
   const changeColor = (color) => {
     setBackgroundColor(color);
