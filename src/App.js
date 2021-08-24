@@ -19,6 +19,9 @@ const App = () => {
               setAccelerationX(event.accelerationIncludingGravity.x);
               setAccelerationY(event.accelerationIncludingGravity.y);
             });
+          } else {
+            setAccelerationX(0);
+            setAccelerationY(-3);
           }
         })
         .catch((e) => {

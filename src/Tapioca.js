@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Common,
   Engine,
@@ -12,12 +12,20 @@ import {
   Composite,
   Vector,
 } from "matter-js";
+import HamburgerMenu from "./HamburgerMenu.js";
 
 const Tapioca = (props) => {
   const scene = useRef();
   const engine = useRef(Engine.create());
 
   const isPressed = useRef(false);
+  const [backgroundColor, setBackgroundColor] = useState("#dcac65");
+  const [cupImage, setCupImage] = useState("logo.png");
+
+  const changeColor = (color) => {
+    setBackgroundColor(color);
+  };
+  document.body.style = `background: ${backgroundColor}`;
 
   useEffect(() => {
     const cw = document.body.clientWidth;
@@ -31,7 +39,7 @@ const Tapioca = (props) => {
         width: cw,
         height: ch,
         wireframes: false,
-        background: "#dcac65",
+        background: "#transparent",
       },
     });
 
@@ -157,6 +165,21 @@ const Tapioca = (props) => {
   return (
     <div>
       {/* <div>x:{accelerationX},y:{accelerationY},z:{accelerationZ}</div> */}
+      <HamburgerMenu
+        setBackgroundColor={setBackgroundColor}
+        setCupImage={setCupImage}
+      />
+      <img
+        src={cupImage}
+        style={{
+          width: "90%",
+          position: "absolute",
+          top: "20%",
+          left: "0",
+          right: "0",
+          margin: "auto",
+        }}
+      />
       <div
       // onMouseDown={handleDown}
       // onMouseUp={handleUp}
