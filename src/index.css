@@ -67,7 +67,7 @@ body {
   top: 0;
   right: 0;
   z-index: 1;
-  width: 15vw;
+  width: 50vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -84,14 +84,13 @@ body {
   text-align: left;
   color: #fff;
   box-sizing: border-box;
-  font-size: 3rem;
 }
 
 /* アニメーション部分 */
 
 /* アニメーション前のメニューの状態 */
 .menu {
-  transform: translateX(15vw);
+  transform: translateX(50vw);
   transition: all 0.3s linear;
 }
 /* アニメーション後のメニューの状態 */

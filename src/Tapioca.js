@@ -57,7 +57,7 @@ const Tapioca = (props) => {
     Composite.add(world, mouseConstraint);
 
     const stack = Composites.stack(0, 0, 10, 4, 1, 1, (x, y) => {
-      return Bodies.circle(x, y, Common.random(70, 80), {
+      return Bodies.circle(x, y, Common.random(30, 30), {
         mass: 10,
         restitution: 0.01,
         friction: 0.01,
@@ -73,7 +73,7 @@ const Tapioca = (props) => {
       });
     });
 
-    const straw = Bodies.rectangle(cw / 2, ch / 2, 50, ch, {
+    const straw = Bodies.rectangle(cw / 2, ch / 2, 40, ch, {
       render: { fillStyle: "#FF0000" },
     });
     const strawConstraint = Constraint.create({
