@@ -17,8 +17,11 @@ import HamburgerMenu from "./HamburgerMenu.js";
 import Modal from "./Modal.js";
 
 const Tapioca = (props) => {
+  const cw = document.body.clientWidth;
+  const ch = document.body.clientHeight;
   const scene = useRef();
   const engine = useRef(Engine.create());
+  const world = engine.current.world;
   const isPressed = useRef(false);
 
   const [backgroundColor, setBackgroundColor] = useState("#dcac65");
@@ -35,11 +38,28 @@ const Tapioca = (props) => {
     });
   };
 
-  useEffect(() => {
-    const cw = document.body.clientWidth;
-    const ch = document.body.clientHeight;
-    const world = engine.current.world;
+  const handleAddStraw = (e) => {
+    const straw = Bodies.rectangle(cw / 2, ch / 2, 40, ch, {
+      render: { fillStyle: "#FF0000" },
+    });
+    const strawConstraint = Constraint.create({
+      pointA: Vector.clone({
+        x: straw.position.x,
+        y: straw.position.y - (ch / 2) * 0.8,
+      }),
+      bodyB: straw,
+      pointB: { x: 0, y: (-ch / 2) * 0.8 },
+      length: 0,
+    });
 
+    Composite.add(world, [straw, strawConstraint]);
+  };
+
+  document.body.style = `background: ${backgroundColor}`;
+  engine.current.gravity.x = props.accelerationX;
+  engine.current.gravity.y = -props.accelerationY;
+
+  useEffect(() => {
     const render = Render.create({
       element: scene.current,
       engine: engine.current,
@@ -81,21 +101,6 @@ const Tapioca = (props) => {
       });
     });
 
-    const straw = Bodies.rectangle(cw / 2, ch / 2, 40, ch, {
-      render: { fillStyle: "#FF0000" },
-    });
-    const strawConstraint = Constraint.create({
-      pointA: Vector.clone({
-        x: straw.position.x,
-        y: straw.position.y - (ch / 2) * 0.8,
-      }),
-      bodyB: straw,
-      pointB: { x: 0, y: (-ch / 2) * 0.8 },
-      length: 0,
-    });
-
-    Composite.add(world, [straw, strawConstraint]);
-
     World.add(engine.current.world, [
       stack,
       Bodies.rectangle(cw / 2, -10, cw, 20, {
@@ -114,15 +119,6 @@ const Tapioca = (props) => {
         isStatic: true,
         render: { fillStyle: "#000000" },
       }),
-      // Bodies.circle(cw / 2, 0, 50, {
-      //   mass: 100,
-      //   restitution: 0.01,
-      //   friction: 0.01,
-      //   render: {
-      //     fillStyle: "#0000ff",
-      //   },
-      //   frictionAir: 0.5,
-      // }),
     ]);
     Engine.run(engine.current);
 
@@ -139,38 +135,6 @@ const Tapioca = (props) => {
     };
   }, []);
 
-  const handleDown = () => {
-    isPressed.current = true;
-  };
-
-  const handleUp = () => {
-    isPressed.current = false;
-  };
-
-  const handleAddCircle = (e) => {
-    if (isPressed.current) {
-      const ball = Bodies.circle(
-        e.clientX,
-        e.clientY,
-        10 + Math.random() * 30,
-        {
-          mass: 100,
-          restitution: 0.01,
-          friction: 0.01,
-          render: {
-            fillStyle: "#0000ff",
-          },
-          frictionAir: 0.1,
-        }
-      );
-      World.add(engine.current.world, [ball]);
-    }
-  };
-
-  document.body.style = `background: ${backgroundColor}`;
-  engine.current.gravity.x = props.accelerationX;
-  engine.current.gravity.y = -props.accelerationY;
-
   return (
     <>
       {/* <div>x:{accelerationX},y:{accelerationY},z:{accelerationZ}</div> */}
@@ -180,14 +144,9 @@ const Tapioca = (props) => {
       <HamburgerMenu
         setBackgroundColor={setBackgroundColor}
         setCupImage={setCupImage}
+        handleAddStraw={handleAddStraw}
       />
-      <div
-        id="target"
-        style={{ backgroundColor: backgroundColor }}
-        // onMouseDown={handleDown}
-        // onMouseUp={handleUp}
-        // onMouseMove={handleAddCircle}
-      >
+      <div id="target" style={{ backgroundColor: backgroundColor }}>
         <img
           src={cupImage}
           style={{

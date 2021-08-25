@@ -20,6 +20,14 @@ const HamburgerMenu = (props) => {
         <div
           className="menu-item"
           onClick={() => {
+            props.handleAddStraw();
+          }}
+        >
+          ストロー
+        </div>
+        <div
+          className="menu-item"
+          onClick={() => {
             props.setBackgroundColor("#dcac65");
           }}
         >
