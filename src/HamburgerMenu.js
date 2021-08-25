@@ -28,10 +28,10 @@ const HamburgerMenu = (props) => {
         <div
           className="menu-item"
           onClick={() => {
-            props.setBackgroundColor("#dcac65");
+            props.setBackgroundColor("#FFC0CB");
           }}
         >
-          ミルクティー
+          イチゴミルク
         </div>
         <div
           className="menu-item"
@@ -43,6 +43,15 @@ const HamburgerMenu = (props) => {
         </div>
         <div
           className="menu-item"
+          onClick={() => {
+            props.setBackgroundColor("#dcac65");
+          }}
+        >
+          ミルクティー
+        </div>
+
+        <div
+          className="menu-item"
           onClick={() => props.setCupImage("logo.PNG")}
         >
           サスタピ
@@ -52,6 +61,12 @@ const HamburgerMenu = (props) => {
           onClick={() => props.setCupImage("alley.png")}
         >
           The alley
+        </div>
+        <div
+          className="menu-item"
+          onClick={() => props.setCupImage("gongcha.png")}
+        >
+          Cong tya
         </div>
       </div>
     </div>
