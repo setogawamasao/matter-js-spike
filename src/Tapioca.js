@@ -12,20 +12,28 @@ import {
   Composite,
   Vector,
 } from "matter-js";
+import html2camvas from "html2canvas";
 import HamburgerMenu from "./HamburgerMenu.js";
+import Modal from "./Modal.js";
 
 const Tapioca = (props) => {
   const scene = useRef();
   const engine = useRef(Engine.create());
-
   const isPressed = useRef(false);
-  const [backgroundColor, setBackgroundColor] = useState("#dcac65");
-  const [cupImage, setCupImage] = useState("logo.PNG");
 
-  const changeColor = (color) => {
-    setBackgroundColor(color);
+  const [backgroundColor, setBackgroundColor] = useState("#dcac65");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [cupImage, setCupImage] = useState("logo.PNG");
+  const [imageData, setImageData] = useState();
+
+  const capture = () => {
+    setIsModalOpen(true);
+    const target = document.getElementById("target");
+    html2camvas(target).then((canvas) => {
+      const imgData = canvas.toDataURL();
+      setImageData(imgData);
+    });
   };
-  document.body.style = `background: ${backgroundColor}`;
 
   useEffect(() => {
     const cw = document.body.clientWidth;
@@ -159,35 +167,43 @@ const Tapioca = (props) => {
     }
   };
 
+  document.body.style = `background: ${backgroundColor}`;
   engine.current.gravity.x = props.accelerationX;
   engine.current.gravity.y = -props.accelerationY;
 
   return (
-    <div>
+    <>
       {/* <div>x:{accelerationX},y:{accelerationY},z:{accelerationZ}</div> */}
+      <div>
+        <input type="button" onClick={capture} value="save photo" />
+      </div>
       <HamburgerMenu
         setBackgroundColor={setBackgroundColor}
         setCupImage={setCupImage}
       />
-      <img
-        src={cupImage}
-        style={{
-          width: "90%",
-          position: "absolute",
-          top: "20%",
-          left: "0",
-          right: "0",
-          margin: "auto",
-        }}
-      />
       <div
-      // onMouseDown={handleDown}
-      // onMouseUp={handleUp}
-      // onMouseMove={handleAddCircle}
+        id="target"
+        style={{ backgroundColor: "#dcac65" }}
+        // onMouseDown={handleDown}
+        // onMouseUp={handleUp}
+        // onMouseMove={handleAddCircle}
       >
+        <img
+          src={cupImage}
+          style={{
+            width: "90%",
+            position: "absolute",
+            top: "20%",
+            left: "0",
+            right: "0",
+            margin: "auto",
+          }}
+        />
         <div ref={scene} style={{ width: "100%", height: "100%" }} />
       </div>
-    </div>
+      {/* modal */}
+      <Modal id="modal-main" imageData={imageData} isModalOpen={isModalOpen} />
+    </>
   );
 };
 
