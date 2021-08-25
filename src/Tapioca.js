@@ -183,7 +183,7 @@ const Tapioca = (props) => {
       />
       <div
         id="target"
-        style={{ backgroundColor: "#dcac65" }}
+        style={{ backgroundColor: backgroundColor }}
         // onMouseDown={handleDown}
         // onMouseUp={handleUp}
         // onMouseMove={handleAddCircle}
@@ -202,7 +202,12 @@ const Tapioca = (props) => {
         <div ref={scene} style={{ width: "100%", height: "100%" }} />
       </div>
       {/* modal */}
-      <Modal id="modal-main" imageData={imageData} isModalOpen={isModalOpen} />
+      <Modal
+        id="modal-main"
+        imageData={imageData}
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+      />
     </>
   );
 };

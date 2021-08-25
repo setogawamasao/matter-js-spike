@@ -24,6 +24,13 @@ const Modal = (props) => {
               </a>
             </div>
             <img src={props.imageData} style={{ width: "100%" }} />
+            <input
+              type="button"
+              onClick={() => {
+                props.setIsModalOpen(false);
+              }}
+              value="close"
+            />
           </div>
         </div>
       )}
