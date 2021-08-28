@@ -49,11 +49,13 @@ const App = () => {
         <div style={{ height: "100%" }}>
           <img
             src={"./logo.PNG"}
+            alt="logo"
             style={{ width: "99%", display: "block", margin: "100px auto " }}
           />
 
           <img
             src={"./start-button.PNG"}
+            alt="start-button"
             onClick={start}
             style={{
               width: "50%",

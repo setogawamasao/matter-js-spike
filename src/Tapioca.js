@@ -22,7 +22,7 @@ const Tapioca = (props) => {
   const scene = useRef();
   const engine = useRef(Engine.create());
   const world = engine.current.world;
-  const isPressed = useRef(false);
+  const [isShowStraw, setIsShowStraw] = useState(true);
 
   const [backgroundColor, setBackgroundColor] = useState("#dcac65");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,21 +38,31 @@ const Tapioca = (props) => {
     });
   };
 
-  const handleAddStraw = (e) => {
-    const straw = Bodies.rectangle(cw / 2, ch / 2, 40, ch, {
-      render: { fillStyle: "#FF0000" },
-    });
-    const strawConstraint = Constraint.create({
-      pointA: Vector.clone({
-        x: straw.position.x,
-        y: straw.position.y - (ch / 2) * 0.8,
-      }),
-      bodyB: straw,
-      pointB: { x: 0, y: (-ch / 2) * 0.8 },
-      length: 0,
-    });
+  const straw = Bodies.rectangle(cw / 2, ch / 2, 40, ch, {
+    render: { fillStyle: "#FF0000" },
+  });
+  const strawConstraint = Constraint.create({
+    pointA: Vector.clone({
+      x: straw.position.x,
+      y: straw.position.y - (ch / 2) * 0.8,
+    }),
+    bodyB: straw,
+    pointB: { x: 0, y: (-ch / 2) * 0.8 },
+    length: 0,
+  });
 
-    Composite.add(world, [straw, strawConstraint]);
+  const handleAddStraw = (e) => {
+    if (isShowStraw) {
+      console.log("show straw");
+      Composite.add(world, [straw, strawConstraint]);
+      setIsShowStraw(false);
+    } else {
+      console.log("show straw already");
+    }
+  };
+  const handleRemoveStraw = (e) => {
+    console.log("hide straw");
+    Composite.remove(world, [straw, strawConstraint]);
   };
 
   document.body.style = `background: ${backgroundColor}`;
@@ -133,7 +143,7 @@ const Tapioca = (props) => {
       render.context = null;
       render.textures = {};
     };
-  }, []);
+  }, [ch, cw, world]);
 
   return (
     <>
@@ -145,10 +155,12 @@ const Tapioca = (props) => {
         setBackgroundColor={setBackgroundColor}
         setCupImage={setCupImage}
         handleAddStraw={handleAddStraw}
+        handleRemoveStraw={handleRemoveStraw}
       />
       <div id="target" style={{ backgroundColor: backgroundColor }}>
         <img
           src={cupImage}
+          alt="cupImage"
           style={{
             width: "90%",
             position: "absolute",

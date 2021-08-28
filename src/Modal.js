@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 const Modal = (props) => {
   return (
     <>
@@ -23,7 +21,11 @@ const Modal = (props) => {
                 tweet
               </a>
             </div>
-            <img src={props.imageData} style={{ width: "100%" }} />
+            <img
+              src={props.imageData}
+              alt="myTapioca"
+              style={{ width: "100%" }}
+            />
             <input
               type="button"
               onClick={() => {

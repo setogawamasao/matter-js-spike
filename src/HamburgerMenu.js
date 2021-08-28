@@ -23,7 +23,15 @@ const HamburgerMenu = (props) => {
             props.handleAddStraw();
           }}
         >
-          ストロー
+          ストローを刺す
+        </div>
+        <div
+          className="menu-item"
+          onClick={() => {
+            props.handleRemoveStraw();
+          }}
+        >
+          ストローを外す
         </div>
         <div
           className="menu-item"
