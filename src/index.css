@@ -15,6 +15,7 @@ body {
   background-color: #ff2994;
 }
 
+/* ハンバーガーメニュ */
 /* メニュー3本線ボタン */
 .menu-trigger span {
   display: inline-block;
@@ -99,7 +100,6 @@ body {
 }
 
 /* モーダル */
-
 #overlay {
   /*　画面全体を覆う設定　*/
   position: fixed;
@@ -117,7 +117,23 @@ body {
 
 #content {
   z-index: 2;
-  width: 50%;
+  width: 60%;
   padding: 1em;
   background: #fff;
+}
+
+/* アイコンレイアウト */
+.icon-circle {
+  border: solid;
+  border-radius: 50%;
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }

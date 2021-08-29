@@ -12,6 +12,8 @@ import {
   Composite,
   Vector,
 } from "matter-js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import html2camvas from "html2canvas";
 import HamburgerMenu from "./HamburgerMenu.js";
 import Modal from "./Modal.js";
@@ -146,10 +148,20 @@ const Tapioca = (props) => {
   }, [ch, cw, world]);
 
   return (
-    <>
+    <div style={{ position: "relative" }}>
       {/* <div>x:{accelerationX},y:{accelerationY},z:{accelerationZ}</div> */}
-      <div>
-        <input type="button" onClick={capture} value="save photo" />
+      <div
+        className="icon-circle"
+        onClick={capture}
+        style={{
+          position: "absolute",
+          width: "50px",
+          height: "50px",
+          top: "10px",
+          left: "10px",
+        }}
+      >
+        <FontAwesomeIcon icon={faCamera} size={"2x"} className="icon" />
       </div>
       <HamburgerMenu
         setBackgroundColor={setBackgroundColor}
@@ -174,12 +186,11 @@ const Tapioca = (props) => {
       </div>
       {/* modal */}
       <Modal
-        id="modal-main"
         imageData={imageData}
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
       />
-    </>
+    </div>
   );
 };
 
