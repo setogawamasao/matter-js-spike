@@ -24,7 +24,7 @@ const Tapioca = (props) => {
   const scene = useRef();
   const engine = useRef(Engine.create());
   const world = engine.current.world;
-  const [isShowStraw, setIsShowStraw] = useState(true);
+  const isShowStraw = useRef(true);
 
   const [backgroundColor, setBackgroundColor] = useState("#dcac65");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -53,18 +53,16 @@ const Tapioca = (props) => {
     length: 0,
   });
 
-  const handleAddStraw = (e) => {
-    if (isShowStraw) {
-      console.log("show straw");
+  const handleStraw = (e) => {
+    if (isShowStraw.current) {
+      // show straw
       Composite.add(world, [straw, strawConstraint]);
-      setIsShowStraw(false);
+      isShowStraw.current = false;
     } else {
-      console.log("show straw already");
+      // hide straw
+      Composite.remove(world, [straw, strawConstraint]);
+      isShowStraw.current = true;
     }
-  };
-  const handleRemoveStraw = (e) => {
-    console.log("hide straw");
-    Composite.remove(world, [straw, strawConstraint]);
   };
 
   document.body.style = `background: ${backgroundColor}`;
@@ -166,8 +164,7 @@ const Tapioca = (props) => {
       <HamburgerMenu
         setBackgroundColor={setBackgroundColor}
         setCupImage={setCupImage}
-        handleAddStraw={handleAddStraw}
-        handleRemoveStraw={handleRemoveStraw}
+        handleStraw={handleStraw}
       />
       <div id="target" style={{ backgroundColor: backgroundColor }}>
         <img
