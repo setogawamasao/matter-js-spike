@@ -76,6 +76,7 @@ body {
   align-items: left;
   background: #555;
   opacity: 0.8;
+  overflow-y: scroll;
 }
 .menu-item {
   width: 100%;

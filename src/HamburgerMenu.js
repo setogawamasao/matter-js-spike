@@ -21,11 +21,25 @@ const HamburgerMenu = (props) => {
         <div className="menu-category">
           <div
             className="menu-item"
-            onClick={() => {
-              props.handleStraw();
-            }}
+            style={{ fontWeight: "bold", fontSize: "1.2rem" }}
           >
             ストロー
+          </div>
+          <div
+            className="menu-item"
+            onClick={() => {
+              props.addStraw();
+            }}
+          >
+            刺す
+          </div>
+          <div
+            className="menu-item"
+            onClick={() => {
+              props.removeStraw();
+            }}
+          >
+            外す
           </div>
         </div>
         <div className="menu-category">

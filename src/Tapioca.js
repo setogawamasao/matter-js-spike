@@ -53,14 +53,20 @@ const Tapioca = (props) => {
     length: 0,
   });
 
-  const handleStraw = (e) => {
+  const addStraw = (e) => {
     if (isShowStraw.current) {
       // show straw
       Composite.add(world, [straw, strawConstraint]);
       isShowStraw.current = false;
-    } else {
+    }
+  };
+
+  const removeStraw = (e) => {
+    if (!isShowStraw.current) {
       // hide straw
-      Composite.remove(world, [straw, strawConstraint]);
+      world.bodies.pop();
+      world.constraints.pop();
+      Composite.setModified(world, true, true, false);
       isShowStraw.current = true;
     }
   };
@@ -164,7 +170,8 @@ const Tapioca = (props) => {
       <HamburgerMenu
         setBackgroundColor={setBackgroundColor}
         setCupImage={setCupImage}
-        handleStraw={handleStraw}
+        addStraw={addStraw}
+        removeStraw={removeStraw}
       />
       <div id="target" style={{ backgroundColor: backgroundColor }}>
         <img
