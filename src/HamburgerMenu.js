@@ -17,56 +17,74 @@ const HamburgerMenu = (props) => {
         <span></span>
       </button>
       <div className={isOpen ? "menu is-active" : "menu"}>
-        <div
-          className="menu-item"
-          onClick={() => {
-            props.handleStraw();
-          }}
-        >
-          ストロー
+        <div className="menu-header">Menu</div>
+        <div className="menu-category">
+          <div
+            className="menu-item"
+            onClick={() => {
+              props.handleStraw();
+            }}
+          >
+            ストロー
+          </div>
         </div>
-        <div
-          className="menu-item"
-          onClick={() => {
-            props.setBackgroundColor("#FFC0CB");
-          }}
-        >
-          イチゴミルク
+        <div className="menu-category">
+          <div
+            className="menu-item"
+            style={{ fontWeight: "bold", fontSize: "1.2rem" }}
+          >
+            味付け
+          </div>
+          <div
+            className="menu-item"
+            onClick={() => {
+              props.setBackgroundColor("#FFC0CB");
+            }}
+          >
+            イチゴミルク
+          </div>
+          <div
+            className="menu-item"
+            onClick={() => {
+              props.setBackgroundColor("#E9ED88");
+            }}
+          >
+            抹茶
+          </div>
+          <div
+            className="menu-item"
+            onClick={() => {
+              props.setBackgroundColor("#dcac65");
+            }}
+          >
+            ミルクティー
+          </div>
         </div>
-        <div
-          className="menu-item"
-          onClick={() => {
-            props.setBackgroundColor("#E9ED88");
-          }}
-        >
-          抹茶
-        </div>
-        <div
-          className="menu-item"
-          onClick={() => {
-            props.setBackgroundColor("#dcac65");
-          }}
-        >
-          ミルクティー
-        </div>
-
-        <div
-          className="menu-item"
-          onClick={() => props.setCupImage("logo.PNG")}
-        >
-          サスタピ
-        </div>
-        <div
-          className="menu-item"
-          onClick={() => props.setCupImage("alley.png")}
-        >
-          The alley
-        </div>
-        <div
-          className="menu-item"
-          onClick={() => props.setCupImage("gongcha.png")}
-        >
-          Cong tya
+        <div className="menu-category">
+          <div
+            className="menu-item"
+            style={{ fontWeight: "bold", fontSize: "1.2rem" }}
+          >
+            パッケージ
+          </div>
+          <div
+            className="menu-item"
+            onClick={() => props.setCupImage("logo.PNG")}
+          >
+            サスタピ
+          </div>
+          <div
+            className="menu-item"
+            onClick={() => props.setCupImage("alley.png")}
+          >
+            The array
+          </div>
+          <div
+            className="menu-item"
+            onClick={() => props.setCupImage("gongcha.png")}
+          >
+            Cong tya
+          </div>
         </div>
       </div>
     </div>
