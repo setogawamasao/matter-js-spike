@@ -20,6 +20,7 @@ const App = () => {
               setAccelerationY(event.accelerationIncludingGravity.y);
             });
           } else {
+            alert("加速度センサーOFF");
             setAccelerationX(0);
             setAccelerationY(-3);
           }
