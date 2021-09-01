@@ -48,24 +48,19 @@ const App = () => {
       )}
       {!isStart && (
         <div style={{ height: "100%" }}>
+          <img src={"./sastapi_top_ttl.png"} alt="logo" className="top-logo" />
+
           <img
-            src={"./logo.PNG"}
-            alt="logo"
-            style={{ width: "99%", display: "block", margin: "100px auto " }}
+            src={"./sastapi_top_drink.png"}
+            alt="drink"
+            className="top-drink"
           />
 
           <img
-            src={"./start-button.PNG"}
+            src={"./sastapi_top_btn_start.png"}
             alt="start-button"
             onClick={start}
-            style={{
-              width: "50%",
-              position: "absolute",
-              bottom: "10%",
-              left: "0",
-              right: "0",
-              margin: "auto",
-            }}
+            className="top-start"
           />
         </div>
       )}

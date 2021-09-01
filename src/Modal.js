@@ -31,6 +31,7 @@ const Modal = (props) => {
               alt="myTapioca"
               style={{ width: "100%" }}
             />
+
             <div style={{ display: "flex", justifyContent: "center" }}>
               <a
                 href={props.imageData}

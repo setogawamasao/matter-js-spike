@@ -1,18 +1,37 @@
-html,
+/* html,
 body,
 #app {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
+} */
+body {
+  font-family: sans-serif;
 }
 
-p {
-  color: #ffdf9a;
-}
-
+/*スマホ用のcssを記述*/
 body {
   background-color: #ff2994;
+  background-image: url("./sastapi_top_bg_dot.png");
+}
+
+.top-logo {
+  width: 80%;
+  display: block;
+  margin: 10% auto auto auto;
+}
+
+.top-drink {
+  width: 30%;
+  display: block;
+  margin: 15% auto auto auto;
+}
+
+.top-start {
+  width: 50%;
+  display: block;
+  margin: 15% auto auto auto;
 }
 
 /* ハンバーガーメニュ */
@@ -155,4 +174,23 @@ body {
   left: 0;
   right: 0;
   margin: auto;
+}
+
+/*pc用のcssを記述*/
+@media (min-width: 640px) {
+  body {
+    background-color: #ff2994;
+  }
+
+  .top-logo {
+    width: 35%;
+    display: block;
+    margin: 2% auto auto auto;
+  }
+
+  .top-start {
+    width: 15%;
+    display: block;
+    margin: 15% auto auto auto;
+  }
 }

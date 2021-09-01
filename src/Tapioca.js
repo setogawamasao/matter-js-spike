@@ -19,8 +19,8 @@ import HamburgerMenu from "./HamburgerMenu.js";
 import Modal from "./Modal.js";
 
 const Tapioca = (props) => {
-  const cw = document.body.clientWidth;
-  const ch = document.body.clientHeight;
+  const cw = window.innerWidth;
+  const ch = window.innerHeight;
   const scene = useRef();
   const engine = useRef(Engine.create());
   const world = engine.current.world;
@@ -28,7 +28,7 @@ const Tapioca = (props) => {
 
   const [backgroundColor, setBackgroundColor] = useState("#dcac65");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [cupImage, setCupImage] = useState("logo.PNG");
+  const [cupImage, setCupImage] = useState();
   const [imageData, setImageData] = useState();
 
   const capture = () => {
@@ -174,26 +174,30 @@ const Tapioca = (props) => {
         removeStraw={removeStraw}
       />
       <div id="target" style={{ backgroundColor: backgroundColor }}>
-        <img
-          src={cupImage}
-          alt="cupImage"
-          style={{
-            width: "90%",
-            position: "absolute",
-            top: "20%",
-            left: "0",
-            right: "0",
-            margin: "auto",
-          }}
-        />
-        <div ref={scene} style={{ width: "100%", height: "100%" }} />
+        {cupImage && (
+          <img
+            src={cupImage}
+            alt="cupImage"
+            style={{
+              width: "90%",
+              position: "absolute",
+              top: "20%",
+              left: "0",
+              right: "0",
+              margin: "auto",
+            }}
+          />
+        )}
+        <div ref={scene} style={{ width: cw, height: ch }} />
       </div>
       {/* modal */}
-      <Modal
-        imageData={imageData}
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-      />
+      {imageData && (
+        <Modal
+          imageData={imageData}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+        />
+      )}
     </div>
   );
 };
