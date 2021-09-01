@@ -167,12 +167,7 @@ const Tapioca = (props) => {
       >
         <FontAwesomeIcon icon={faCamera} size={"2x"} className="icon" />
       </div>
-      <HamburgerMenu
-        setBackgroundColor={setBackgroundColor}
-        setCupImage={setCupImage}
-        addStraw={addStraw}
-        removeStraw={removeStraw}
-      />
+
       <div id="target" style={{ backgroundColor: backgroundColor }}>
         {cupImage && (
           <img
@@ -190,7 +185,7 @@ const Tapioca = (props) => {
         )}
         <div ref={scene} style={{ width: cw, height: ch }} />
       </div>
-      {/* modal */}
+      {/* Modal */}
       {imageData && (
         <Modal
           imageData={imageData}
@@ -198,6 +193,14 @@ const Tapioca = (props) => {
           setIsModalOpen={setIsModalOpen}
         />
       )}
+      {/* Hamburger Menu */}
+      <HamburgerMenu
+        backgroundColor={backgroundColor}
+        setBackgroundColor={setBackgroundColor}
+        setCupImage={setCupImage}
+        addStraw={addStraw}
+        removeStraw={removeStraw}
+      />
     </div>
   );
 };

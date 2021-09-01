@@ -25,7 +25,7 @@ body {
 .top-drink {
   width: 30%;
   display: block;
-  margin: 15% auto auto auto;
+  margin: 10% auto auto auto;
 }
 
 .top-start {
@@ -141,6 +141,7 @@ body {
 #overlay {
   /*　画面全体を覆う設定　*/
   position: fixed;
+  z-index: 10;
   top: 0;
   left: 0;
   width: 100%;
@@ -154,9 +155,9 @@ body {
 }
 
 #content {
-  z-index: 2;
-  width: 60%;
-  padding: 1em;
+  z-index: 11;
+  width: 85%;
+  padding: 20px;
   background: #fff;
 }
 

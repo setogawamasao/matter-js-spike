@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { SliderPicker } from "react-color";
 
 const HamburgerMenu = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const handleChangeComplete = (color) => {
+    props.setBackgroundColor(color.hex);
+  };
   return (
     <div>
       <button
@@ -72,6 +75,13 @@ const HamburgerMenu = (props) => {
             }}
           >
             ミルクティー
+          </div>
+          <div className="menu-item">
+            お好み
+            <SliderPicker
+              color={props.backgroundColor}
+              onChangeComplete={handleChangeComplete}
+            />
           </div>
         </div>
         <div className="menu-category">

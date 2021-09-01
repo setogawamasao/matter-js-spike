@@ -8,7 +8,12 @@ const Modal = (props) => {
         <div id="overlay">
           <div
             id="content"
-            style={{ backgroundColor: "#ff2994", position: "relative" }}
+            style={{
+              backgroundImage: "url(sastapi_top_bg_dot.png)",
+              backgroundColor: "#ff2994",
+              position: "relative",
+              borderRadius: "20px",
+            }}
           >
             <div
               className="icon-circle"
@@ -29,21 +34,29 @@ const Modal = (props) => {
             <img
               src={props.imageData}
               alt="myTapioca"
-              style={{ width: "100%" }}
+              style={{ width: "100%", borderRadius: "20px" }}
             />
-
-            <div style={{ display: "flex", justifyContent: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "15px",
+              }}
+            >
               <a
                 href={props.imageData}
                 id="myTapioca"
                 download="myTapioca.png"
                 style={{
+                  width: "100%",
                   backgroundColor: "yellow",
                   color: "red",
                   textDecoration: "none",
                   lineHeight: "28.45px",
                   padding: "0 16px",
                   marginRight: "8px",
+                  textAlign: "center",
+                  borderRadius: "20px",
                 }}
               >
                 保存
@@ -51,11 +64,12 @@ const Modal = (props) => {
               <a
                 style={{
                   backgroundColor: "#00acee",
-                  width: "64px",
+                  width: "100%",
                   textAlign: "center",
                   lineHeight: "24px",
                   display: "flex",
                   justifyContent: "center",
+                  borderRadius: "20px",
                 }}
                 href={
                   "https://twitter.com/intent/tweet?text=" +
