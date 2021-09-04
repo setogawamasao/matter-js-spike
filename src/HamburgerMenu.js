@@ -21,94 +21,70 @@ const HamburgerMenu = (props) => {
       </button>
       <div className={isOpen ? "menu is-active" : "menu"}>
         <div className="menu-header">Menu</div>
-        <div className="menu-category">
-          <div
-            className="menu-item"
-            style={{ fontWeight: "bold", fontSize: "1.2rem" }}
-          >
-            ストロー
-          </div>
-          <div
-            className="menu-item"
-            onClick={() => {
-              props.addStraw();
-            }}
-          >
-            刺す
-          </div>
-          <div
-            className="menu-item"
-            onClick={() => {
-              props.removeStraw();
-            }}
-          >
-            外す
-          </div>
-        </div>
-        <div className="menu-category">
-          <div
-            className="menu-item"
-            style={{ fontWeight: "bold", fontSize: "1.2rem" }}
-          >
-            味付け
-          </div>
-          <div
-            className="menu-item"
-            onClick={() => {
-              props.setBackgroundColor("#FFC0CB");
-            }}
-          >
-            イチゴミルク
-          </div>
-          <div
-            className="menu-item"
-            onClick={() => {
-              props.setBackgroundColor("#E9ED88");
-            }}
-          >
-            抹茶
-          </div>
-          <div
-            className="menu-item"
-            onClick={() => {
-              props.setBackgroundColor("#dcac65");
-            }}
-          >
-            ミルクティー
-          </div>
-          <div className="menu-item">
-            お好み
-            <SliderPicker
-              color={props.backgroundColor}
-              onChangeComplete={handleChangeComplete}
-            />
-          </div>
-        </div>
-        <div className="menu-category">
-          <div
-            className="menu-item"
-            style={{ fontWeight: "bold", fontSize: "1.2rem" }}
-          >
-            パッケージ
-          </div>
-          <div
-            className="menu-item"
-            onClick={() => props.setCupImage("logo.PNG")}
-          >
-            サスタピ
-          </div>
-          <div
-            className="menu-item"
-            onClick={() => props.setCupImage("alley.png")}
-          >
-            The array
-          </div>
-          <div
-            className="menu-item"
-            onClick={() => props.setCupImage("gongcha.png")}
-          >
-            Cong tya
-          </div>
+        <div className="menu_">
+          <label for="menu_bar01"> ストロー</label>
+          <input type="checkbox" id="menu_bar01" />
+          <ul id="links01">
+            <li>
+              <a onClick={props.addStraw}>刺す</a>
+            </li>
+            <li>
+              <a onClick={props.removeStraw}>外す</a>
+            </li>
+          </ul>
+          <label for="menu_bar02">味付け</label>
+          <input type="checkbox" id="menu_bar02" />
+          <ul id="links02">
+            <li>
+              <a
+                onClick={() => {
+                  props.setBackgroundColor("#FFC0CB");
+                }}
+              >
+                イチゴミルク
+              </a>
+            </li>
+            <li>
+              <a
+                onClick={() => {
+                  props.setBackgroundColor("#E9ED88");
+                }}
+              >
+                抹茶
+              </a>
+            </li>
+            <li>
+              <a
+                onClick={() => {
+                  props.setBackgroundColor("#dcac65");
+                }}
+              >
+                ミルクティー
+              </a>
+            </li>
+            <li>
+              <a>
+                お好み
+                <SliderPicker
+                  color={props.backgroundColor}
+                  onChangeComplete={handleChangeComplete}
+                />
+              </a>
+            </li>
+          </ul>
+          <label for="menu_bar03">パッケージ</label>
+          <input type="checkbox" id="menu_bar03" />
+          <ul id="links03">
+            <li>
+              <a onClick={() => props.setCupImage("logo.PNG")}>サスタピ</a>
+            </li>
+            <li>
+              <a onClick={() => props.setCupImage("alley.png")}>The array</a>
+            </li>
+            <li>
+              <a onClick={() => props.setCupImage("gongcha.png")}>Cong tya</a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
