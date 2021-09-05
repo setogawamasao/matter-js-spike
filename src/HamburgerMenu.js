@@ -22,8 +22,10 @@ const HamburgerMenu = (props) => {
       <div className={isOpen ? "menu is-active" : "menu"}>
         <div className="menu-header">Menu</div>
         <div className="menu_">
-          <label for="menu_bar01"> ストロー</label>
-          <input type="checkbox" id="menu_bar01" />
+          <input type="checkbox" id="menu_bar01" className="acd-check" />
+          <label htmlFor="menu_bar01" className="acd-label">
+            ストロー
+          </label>
           <ul id="links01">
             <li>
               <a onClick={props.addStraw}>刺す</a>
@@ -32,8 +34,8 @@ const HamburgerMenu = (props) => {
               <a onClick={props.removeStraw}>外す</a>
             </li>
           </ul>
-          <label for="menu_bar02">味付け</label>
           <input type="checkbox" id="menu_bar02" />
+          <label htmlFor="menu_bar02">味付け</label>
           <ul id="links02">
             <li>
               <a
@@ -72,8 +74,8 @@ const HamburgerMenu = (props) => {
               </a>
             </li>
           </ul>
-          <label for="menu_bar03">パッケージ</label>
           <input type="checkbox" id="menu_bar03" />
+          <label htmlFor="menu_bar03">パッケージ</label>
           <ul id="links03">
             <li>
               <a onClick={() => props.setCupImage("logo.PNG")}>サスタピ</a>

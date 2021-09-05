@@ -196,10 +196,6 @@ body {
   }
 }
 
-.menu_ {
-  max-width: 600px;
-}
-
 .menu_ a {
   display: block;
   padding: 15px;
@@ -213,7 +209,7 @@ label {
   padding: 15px;
   line-height: 1;
   color: #fff;
-  background: green;
+  background: rgb(95, 100, 95);
   cursor: pointer;
 }
 
@@ -243,4 +239,34 @@ input {
 #menu_bar03:checked ~ #links03 li {
   height: 54px;
   opacity: 1;
+}
+
+#menu_bar02:checked ~ #links02 li:last-child {
+  height: 91px;
+  opacity: 1;
+}
+
+.acd-label {
+  position: relative;
+}
+
+.acd-label:after {
+  content: ""; /* 空でも必要 */
+  /* 位置調整 */
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  /* 矢印形状調整 */
+  border-bottom: solid 4px #fff;
+  border-right: solid 4px #fff;
+  width: 18px;
+  height: 18px;
+  transform: rotate(45deg);
+  /* アニメーション */
+  transition: all 0.3s;
+}
+
+.acd-check:checked + .acd-label:after {
+  top: 16px;
+  transform: rotate(225deg);
 }

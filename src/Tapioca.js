@@ -25,20 +25,16 @@ const Tapioca = (props) => {
   const engine = useRef(Engine.create());
   const world = engine.current.world;
   const isShowStraw = useRef(true);
+  const isPressed = useRef(false);
 
   const [backgroundColor, setBackgroundColor] = useState("#dcac65");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cupImage, setCupImage] = useState();
   const [imageData, setImageData] = useState();
 
-  const capture = () => {
-    setIsModalOpen(true);
-    const target = document.getElementById("target");
-    html2camvas(target).then((canvas) => {
-      const imgData = canvas.toDataURL();
-      setImageData(imgData);
-    });
-  };
+  document.body.style = `background: ${backgroundColor}`;
+  engine.current.gravity.x = props.accelerationX;
+  engine.current.gravity.y = -props.accelerationY;
 
   const straw = Bodies.rectangle(cw / 2, ch / 2, 40, ch, {
     render: { fillStyle: "#FF0000" },
@@ -71,9 +67,44 @@ const Tapioca = (props) => {
     }
   };
 
-  document.body.style = `background: ${backgroundColor}`;
-  engine.current.gravity.x = props.accelerationX;
-  engine.current.gravity.y = -props.accelerationY;
+  const capture = () => {
+    setIsModalOpen(true);
+    const target = document.getElementById("target");
+    html2camvas(target).then((canvas) => {
+      const imgData = canvas.toDataURL();
+      setImageData(imgData);
+    });
+  };
+
+  const handleDown = () => {
+    console.log("down");
+    isPressed.current = true;
+  };
+
+  const handleUp = () => {
+    console.log("up");
+    isPressed.current = false;
+  };
+
+  const handleAddCircle = (e) => {
+    console.log("move");
+    // if (isPressed.current) {
+    //   const ball = Bodies.circle(
+    //     e.changedTouches[0].pageX,
+    //     e.changedTouches[0].pageY,
+    //     10 + Math.random() * 30,
+    //     {
+    //       mass: 10,
+    //       restitution: 0.9,
+    //       friction: 0.005,
+    //       render: {
+    //         fillStyle: "#0000ff",
+    //       },
+    //     }
+    //   );
+    //   World.add(engine.current.world, [ball]);
+    // }
+  };
 
   useEffect(() => {
     const render = Render.create({
@@ -168,7 +199,13 @@ const Tapioca = (props) => {
         <FontAwesomeIcon icon={faCamera} size={"2x"} className="icon" />
       </div>
 
-      <div id="target" style={{ backgroundColor: backgroundColor }}>
+      <div
+        id="target"
+        style={{ backgroundColor: backgroundColor }}
+        onTouchStart={handleDown}
+        onTouchEnd={handleUp}
+        onTouchMove={handleAddCircle}
+      >
         {cupImage && (
           <img
             src={cupImage}
