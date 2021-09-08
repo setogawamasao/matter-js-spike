@@ -81,6 +81,7 @@ const Modal = (props) => {
                 <img
                   src="2021 Twitter logo - white.png"
                   style={{ width: "20px", padding: "6px 0" }}
+                  alt="twitter"
                 />
               </a>
             </div>

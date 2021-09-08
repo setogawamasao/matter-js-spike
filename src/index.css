@@ -17,7 +17,6 @@ body {
   background-image: url("./sastapi_top_bg_dot.png");
 }
 
-
 /* ハンバーガーメニュ */
 /* メニュー3本線ボタン */
 .menu-trigger span {
@@ -161,7 +160,14 @@ body {
   margin: auto;
 }
 
-.menu_ a {
+.menu_ button {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  color: #000;
+}
+
+.menu_ span {
   display: block;
   padding: 15px;
   text-decoration: none;
@@ -243,8 +249,8 @@ input {
     max-width: 600px;
     margin: auto;
   }
-  
-    .top-logo {
+
+  .top-logo {
     width: 80%;
     display: block;
     margin: 10% auto auto auto;
@@ -262,7 +268,6 @@ input {
     margin: 15% auto auto auto;
   }
 }
-
 
 /*pc用のcssを記述*/
 @media (min-width: 769px) {
@@ -295,5 +300,4 @@ input {
     width: 25%;
     margin: auto;
   }
-}/*end PC*/
-
+} /*end PC*/

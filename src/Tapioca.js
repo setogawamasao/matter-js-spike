@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
+  Runner,
   Common,
   Engine,
   Render,
@@ -167,7 +168,7 @@ const Tapioca = (props) => {
         render: { fillStyle: "#000000" },
       }),
     ]);
-    Engine.run(engine.current);
+    Runner.run(engine.current);
 
     Render.run(render);
 
@@ -179,6 +180,7 @@ const Tapioca = (props) => {
       render.canvas = null;
       render.context = null;
       render.textures = {};
+      engine.current = null;
     };
   }, [ch, cw, world]);
 
