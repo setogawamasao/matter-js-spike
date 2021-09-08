@@ -34,8 +34,10 @@ const HamburgerMenu = (props) => {
               <a onClick={props.removeStraw}>外す</a>
             </li>
           </ul>
-          <input type="checkbox" id="menu_bar02" />
-          <label htmlFor="menu_bar02">味付け</label>
+          <input type="checkbox" id="menu_bar02" className="acd-check" />
+          <label htmlFor="menu_bar02" className="acd-label">
+            味付け
+          </label>
           <ul id="links02">
             <li>
               <a
@@ -74,8 +76,10 @@ const HamburgerMenu = (props) => {
               </a>
             </li>
           </ul>
-          <input type="checkbox" id="menu_bar03" />
-          <label htmlFor="menu_bar03">パッケージ</label>
+          <input type="checkbox" id="menu_bar03" className="acd-check" />
+          <label htmlFor="menu_bar03" className="acd-label">
+            パッケージ
+          </label>
           <ul id="links03">
             <li>
               <a onClick={() => props.setCupImage("logo.PNG")}>サスタピ</a>
