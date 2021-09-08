@@ -6,6 +6,7 @@ body,
   margin: 0;
   padding: 0;
 } */
+
 body {
   font-family: sans-serif;
 }
@@ -16,23 +17,6 @@ body {
   background-image: url("./sastapi_top_bg_dot.png");
 }
 
-.top-logo {
-  width: 80%;
-  display: block;
-  margin: 10% auto auto auto;
-}
-
-.top-drink {
-  width: 30%;
-  display: block;
-  margin: 10% auto auto auto;
-}
-
-.top-start {
-  width: 50%;
-  display: block;
-  margin: 15% auto auto auto;
-}
 
 /* ハンバーガーメニュ */
 /* メニュー3本線ボタン */
@@ -177,25 +161,6 @@ body {
   margin: auto;
 }
 
-/*pc用のcssを記述*/
-@media (min-width: 640px) {
-  body {
-    background-color: #ff2994;
-  }
-
-  .top-logo {
-    width: 35%;
-    display: block;
-    margin: 2% auto auto auto;
-  }
-
-  .top-start {
-    width: 15%;
-    display: block;
-    margin: 15% auto auto auto;
-  }
-}
-
 .menu_ a {
   display: block;
   padding: 15px;
@@ -270,3 +235,65 @@ input {
   top: 16px;
   transform: rotate(225deg);
 }
+
+/*TOP*/
+/*SP*/
+@media (max-width: 768px) {
+  .top_wrapper {
+    max-width: 600px;
+    margin: auto;
+  }
+  
+    .top-logo {
+    width: 80%;
+    display: block;
+    margin: 10% auto auto auto;
+  }
+
+  .top-drink {
+    width: 30%;
+    display: block;
+    margin: 10% auto auto auto;
+  }
+
+  .top-start {
+    width: 50%;
+    display: block;
+    margin: 15% auto auto auto;
+  }
+}
+
+
+/*pc用のcssを記述*/
+@media (min-width: 769px) {
+  img {
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+  }
+  body {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .top_wrapper {
+    padding: 5% 0;
+  }
+  .top-logo {
+    width: 40%;
+    margin: 0 auto 3%;
+  }
+  .top-drink {
+    width: 20%;
+    margin: 0 auto 7%;
+    text-align: center;
+  }
+  .top-drink img {
+    width: 165px;
+  }
+  .top-start {
+    width: 25%;
+    margin: auto;
+  }
+}/*end PC*/
+

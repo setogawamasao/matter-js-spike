@@ -61,21 +61,23 @@ const App = () => {
         <Tapioca accelerationX={accelerationX} accelerationY={accelerationY} />
       )}
       {!isStart && (
-        <div style={{ height: "100%" }}>
-          <img src={"./sastapi_top_ttl.png"} alt="logo" className="top-logo" />
-
-          <img
-            src={"./sastapi_top_drink.png"}
-            alt="drink"
-            className="top-drink"
-          />
-
-          <img
-            src={"./sastapi_top_btn_start.png"}
-            alt="start-button"
-            onClick={start}
-            className="top-start"
-          />
+        <div className="top_wrapper">
+          <div className="top-logo">
+            <img src={"./sastapi_top_ttl.png"} alt="logo" />
+          </div>
+          <div className="top-drink">
+            <img
+              src={"./sastapi_top_drink.png"}
+              alt="drink"
+            />
+          </div>
+          <div className="top-start">
+            <img
+              src={"./sastapi_top_btn_start.png"}
+              alt="start-button"
+              onClick={start}
+            />
+          </div>
         </div>
       )}
     </>
