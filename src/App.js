@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Tapioca from "./Tapioca.js";
+import { isIOS, isAndroid, isWinPhone } from "react-device-detect";
 
 const App = () => {
   const [isStart, setIsStart] = useState(false);
@@ -7,27 +8,40 @@ const App = () => {
   const [accelerationY, setAccelerationY] = useState(0);
 
   const deviceMotionRequest = () => {
-    if (DeviceMotionEvent.requestPermission) {
-      DeviceMotionEvent.requestPermission()
-        .then((permissionState) => {
-          if (permissionState === "granted") {
-            window.addEventListener("devicemotion", (event) => {
-              if (!event.accelerationIncludingGravity) {
-                alert("event.accelerationIncludingGravity is null");
-                return;
-              }
-              setAccelerationX(event.accelerationIncludingGravity.x);
-              setAccelerationY(event.accelerationIncludingGravity.y);
-            });
-          } else {
-            alert("加速度センサーOFF");
-            setAccelerationX(0);
-            setAccelerationY(-3);
-          }
-        })
-        .catch((e) => {
-          alert(e);
-        });
+    if (isIOS) {
+      if (DeviceMotionEvent.requestPermission) {
+        DeviceMotionEvent.requestPermission()
+          .then((permissionState) => {
+            if (permissionState === "granted") {
+              window.addEventListener("devicemotion", (event) => {
+                if (!event.accelerationIncludingGravity) {
+                  alert("event.accelerationIncludingGravity is null");
+                  return;
+                }
+                // iosで許可
+                setAccelerationX(event.accelerationIncludingGravity.x);
+                setAccelerationY(event.accelerationIncludingGravity.y);
+              });
+            } else {
+              // iosでキャンセル
+              setAccelerationX(0);
+              setAccelerationY(-3);
+            }
+          })
+          .catch((e) => {
+            alert(e);
+          });
+      }
+    } else if (isAndroid || isWinPhone) {
+      window.addEventListener("devicemotion", (event) => {
+        if (!event.accelerationIncludingGravity) {
+          alert("event.accelerationIncludingGravity is null");
+          return;
+        }
+        // androidはセンサーが逆
+        setAccelerationX(event.accelerationIncludingGravity.x * -1);
+        setAccelerationY(event.accelerationIncludingGravity.y * -1);
+      });
     } else {
       // 加速度センサーがない場合は自然落下
       alert("このデバイスには加速度センサーが搭載されておりません");
