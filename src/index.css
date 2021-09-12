@@ -1,9 +1,6 @@
-body {
-  font-family: sans-serif;
-}
-
 /*スマホ用のcssを記述*/
 body {
+  font-family: sans-serif;
   background-color: #ff2994;
   background-image: url("./sastapi_top_bg_dot.png");
 }
@@ -21,10 +18,11 @@ body {
   background-color: #ffffff;
   border-radius: 4px;
 }
+
 .menu-trigger {
   position: fixed;
   top: 3px;
-  right: 17px;
+  right: 3px;
   z-index: 3;
   width: 50px;
   height: 44px;
@@ -44,6 +42,7 @@ body {
 .menu-trigger span:nth-of-type(3) {
   bottom: 0;
 }
+
 /* 開いてるボタン */
 .menu-trigger.is-active span:nth-of-type(1) {
   transform: translateY(20px) rotate(-45deg);
@@ -61,15 +60,15 @@ body {
   top: 0;
   right: 0;
   z-index: 1;
-  width: 50vw;
+  width: 70vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: left;
   background: #555;
   opacity: 0.8;
-  overflow-y: scroll;
 }
+
 .menu-item {
   width: 100%;
   height: auto;
@@ -89,20 +88,9 @@ body {
   border-bottom: solid 2px #ffffff;
 }
 
-.menu-category-header {
-  font-weight: bold;
-}
-
-.menu-category {
-  color: #fff;
-  border-bottom: solid 2px #ffffff;
-}
-
-/* アニメーション部分 */
-
 /* アニメーション前のメニューの状態 */
 .menu {
-  transform: translateX(50vw);
+  transform: translateX(70vw);
   transition: all 0.3s linear;
 }
 /* アニメーション後のメニューの状態 */
@@ -112,7 +100,7 @@ body {
 
 /* モーダル */
 #overlay {
-  /*　画面全体を覆う設定　*/
+  /* 画面全体を覆う設定 */
   position: fixed;
   z-index: 10;
   top: 0;
@@ -120,8 +108,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-
-  /*　画面の中央に要素を表示させる設定　*/
+  /* 画面の中央に要素を表示させる設定 */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -150,14 +137,14 @@ body {
   margin: auto;
 }
 
-.menu_ button {
+.acd-menu button {
   display: block;
   padding: 15px;
   text-decoration: none;
   color: #000;
 }
 
-.menu_ span {
+.acd-menu span {
   display: block;
   padding: 15px;
   text-decoration: none;
@@ -232,34 +219,60 @@ input {
   transform: rotate(225deg);
 }
 
+/*QR CODE START*/
+.qr_wrapper {
+  padding: 8.5vh 0 0;
+}
+
+.qr-message {
+  width: 75vh;
+  margin: 0 auto 3vh;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.qr-code {
+  width: 50vh;
+  margin: 0 auto 6vh;
+  text-align: center;
+}
+/*QR CODE END*/
+
 /*TOP*/
-/*SP*/
+/*SP START*/
 @media (max-width: 768px) {
+  img {
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+  }
+  body {
+    height: 100vh;
+    overflow: hidden;
+  }
+
   .top_wrapper {
-    max-width: 600px;
-    margin: auto;
+    padding: 8.5vh 0 0;
   }
-
   .top-logo {
-    width: 80%;
-    display: block;
-    margin: 10% auto auto auto;
+    width: 50vh;
+    margin: 0 auto 3vh;
   }
-
   .top-drink {
-    width: 30%;
-    display: block;
-    margin: 10% auto auto auto;
+    width: 18vh;
+    margin: 0 auto 6vh;
+    text-align: center;
   }
 
   .top-start {
-    width: 50%;
-    display: block;
-    margin: 15% auto auto auto;
+    width: 32vh;
+    margin: auto;
   }
 }
+/*SP END*/
 
-/*pc用のcssを記述*/
+/*PC START*/
 @media (min-width: 769px) {
   img {
     box-sizing: border-box;
@@ -283,10 +296,9 @@ input {
     margin: 0 auto 6vh;
     text-align: center;
   }
-  .top-drink img {
-  }
+
   .top-start {
     width: 32vh;
     margin: auto;
   }
-} /*end PC*/
+} /*PC END*/

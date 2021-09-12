@@ -73,9 +73,10 @@ const Modal = (props) => {
                 }}
                 href={
                   "https://twitter.com/intent/tweet?text=" +
-                  "サステナブルタピオカやってみた！%0D%0A" +
+                  "【バーチャル・タピオカ・アプリ】%0D%0A" +
+                  "物理エンジンと加速度センサーで実現！！%0D%0A" +
                   "&hashtags=サステナブルタピオカ" +
-                  "&url=https://sasutapi.com"
+                  "&url=https://sustapi.com %0D%0A"
                 }
               >
                 <img

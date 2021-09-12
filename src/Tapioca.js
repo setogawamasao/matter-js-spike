@@ -194,8 +194,8 @@ const Tapioca = (props) => {
           position: "absolute",
           width: "50px",
           height: "50px",
-          top: "10px",
-          left: "10px",
+          top: "3px",
+          left: "3px",
         }}
       >
         <FontAwesomeIcon icon={faCamera} size={"2x"} className="icon" />

@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import Tapioca from "./Tapioca.js";
-import { isIOS, isAndroid, isWinPhone } from "react-device-detect";
+import QrCode from "./QrCode.js";
+import {
+  isIOS,
+  isAndroid,
+  isWinPhone,
+  BrowserView,
+  MobileView,
+} from "react-device-detect";
 
 const App = () => {
   const [isStart, setIsStart] = useState(false);
@@ -44,7 +51,6 @@ const App = () => {
       });
     } else {
       // 加速度センサーがない場合は自然落下
-      alert("このデバイスには加速度センサーが搭載されておりません");
       setAccelerationX(0);
       setAccelerationY(-3);
     }
@@ -57,19 +63,13 @@ const App = () => {
 
   return (
     <>
-      {isStart && (
-        <Tapioca accelerationX={accelerationX} accelerationY={accelerationY} />
-      )}
       {!isStart && (
         <div className="top_wrapper">
           <div className="top-logo">
             <img src={"./sastapi_top_ttl.png"} alt="logo" />
           </div>
           <div className="top-drink">
-            <img
-              src={"./sastapi_top_drink.png"}
-              alt="drink"
-            />
+            <img src={"./sastapi_top_drink.png"} alt="drink" />
           </div>
           <div className="top-start">
             <img
@@ -79,6 +79,20 @@ const App = () => {
             />
           </div>
         </div>
+      )}
+
+      {isStart && (
+        <>
+          <MobileView>
+            <Tapioca
+              accelerationX={accelerationX}
+              accelerationY={accelerationY}
+            />
+          </MobileView>
+          <BrowserView>
+            <QrCode />
+          </BrowserView>
+        </>
       )}
     </>
   );
