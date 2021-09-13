@@ -26,3 +26,5 @@ jobs:
         script: |
           cd ${{ secrets.SERVER_DEPLOY_DIR }}
           git pull origin main
+          rm -rf ../public_html/*
+          cp -pR docs/* ../public_html
