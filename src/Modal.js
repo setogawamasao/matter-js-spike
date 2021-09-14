@@ -9,7 +9,7 @@ const Modal = (props) => {
           <div
             id="content"
             style={{
-              backgroundImage: "url(sastapi_top_bg_dot.png)",
+              backgroundImage: "url(sustapi_top_bg_dot.png)",
               backgroundColor: "#ff2994",
               position: "relative",
               borderRadius: "20px",

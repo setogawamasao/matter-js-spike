@@ -40,6 +40,7 @@ const Tapioca = (props) => {
   const straw = Bodies.rectangle(cw / 2, ch / 2, 40, ch, {
     render: { fillStyle: "#FF0000" },
   });
+
   const strawConstraint = Constraint.create({
     pointA: Vector.clone({
       x: straw.position.x,

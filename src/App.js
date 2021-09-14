@@ -14,6 +14,11 @@ const App = () => {
   const [accelerationX, setAccelerationX] = useState(0);
   const [accelerationY, setAccelerationY] = useState(0);
 
+  const start = () => {
+    deviceMotionRequest();
+    setIsStart(true);
+  };
+
   const deviceMotionRequest = () => {
     if (isIOS) {
       if (DeviceMotionEvent.requestPermission) {
@@ -56,27 +61,18 @@ const App = () => {
     }
   };
 
-  const start = () => {
-    deviceMotionRequest();
-    setIsStart(true);
-  };
-
   return (
     <>
       {!isStart && (
         <div className="top_wrapper">
           <div className="top-logo">
-            <img src={"./sastapi_top_ttl.png"} alt="logo" />
+            <img src="sustapi_top_ttl.png" alt="logo" />
           </div>
           <div className="top-drink">
-            <img src={"./sastapi_top_drink.png"} alt="drink" />
+            <img src="sustapi_top_drink.png" alt="drink" />
           </div>
-          <div className="top-start">
-            <img
-              src={"./sastapi_top_btn_start.png"}
-              alt="start-button"
-              onClick={start}
-            />
+          <div className="top-start" onClick={start}>
+            <img src="sustapi_top_btn_start.png" alt="start-button" />
           </div>
         </div>
       )}
