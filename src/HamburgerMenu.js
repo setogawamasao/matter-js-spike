@@ -75,9 +75,6 @@ const HamburgerMenu = (props) => {
             パッケージ
           </label>
           <ul id="links03">
-            <li onClick={() => props.setCupImage("logo.PNG")}>
-              <button>サスタピ</button>
-            </li>
             <li onClick={() => props.setCupImage("alley.png")}>
               <button>The array</button>
             </li>
