@@ -214,9 +214,9 @@ const Tapioca = (props) => {
             src={cupImage}
             alt="cupImage"
             style={{
-              width: "90%",
+              width: "100%",
               position: "absolute",
-              top: "20%",
+              top: "14%",
               left: "0",
               right: "0",
               margin: "auto",
