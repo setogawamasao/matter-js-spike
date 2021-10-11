@@ -53,7 +53,6 @@ const Tapioca = (props) => {
 
   const addStraw = (e) => {
     if (isShowStraw.current) {
-      // show straw
       Composite.add(world, [straw, strawConstraint]);
       isShowStraw.current = false;
     }
@@ -61,7 +60,6 @@ const Tapioca = (props) => {
 
   const removeStraw = (e) => {
     if (!isShowStraw.current) {
-      // hide straw
       world.bodies.pop();
       world.constraints.pop();
       Composite.setModified(world, true, true, false);
